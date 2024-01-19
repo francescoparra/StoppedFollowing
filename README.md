@@ -11,7 +11,7 @@ StoppedFollowing is a Python app designed to help you identify individuals who h
 
 1. Clone the project:
     ```bash
-    git clone https://github.com/your_username/project.git
+    git clone https://github.com/francescoparra/StoppedFollowing.git
     cd project_folder
     ```
 
