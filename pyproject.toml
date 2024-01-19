@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "stoppedfollowing"
+name = "Stoppedfollowing"
 version = "0.1.0"
-description = "Tool that checks who unfollowed you on Instagram"
+description = "StoppedFollowing is a Python app designed to help you identify individuals who have unfollowed you on Instagram."
 authors = ["Francesco Parra <francescoparra02@gmail.com>"]
 license = "MIT"
 readme = "README.md"
