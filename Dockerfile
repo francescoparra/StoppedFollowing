@@ -1,8 +1,7 @@
-# Use an official Python 3.11 image
 FROM python:3.11
 
 # Install Poetry
-RUN curl -sSL https://install.python-poetry.org | python3 -
+RUN pip install poetry
 
 # Set the working directory to /app
 WORKDIR /app
