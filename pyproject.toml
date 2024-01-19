@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "stoppedfollowing"
+version = "0.1.0"
+description = "Tool that checks who unfollowed you on Instagram"
+authors = ["Francesco Parra <francescoparra02@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+instaloader = "^4.10.3"
+python-dotenv = "^1.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
