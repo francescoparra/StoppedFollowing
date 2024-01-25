@@ -4,13 +4,14 @@ import os
 from instaloader import Profile
 from datetime import date
 from dotenv import load_dotenv
+from typing import Dict
 
 UNFOLLOWED_FILE_PATH = "unfollowed_you.json"
 PREVIOUS_FOLLOWERS_FILE_PATH = "previous_time_followers.json"
 
 
-def is_file_empty(file_path):
-    return os.path.getsize(file_path) == 0
+def file_exists(file_path):
+    return os.path.exists(file_path)
 
 
 def read_json_file(file_path):
@@ -25,19 +26,30 @@ def read_json_file(file_path):
         return None
 
 
+def load_environment_variables():
+    load_dotenv('.env')
+    required_variables = ["INSTAGRAM_USERNAME", "INSTAGRAM_PASSWORD"]
+    try:
+        for variable in required_variables:
+            if not os.getenv(variable):
+                raise ValueError(f"Error: {variable} environment variable is not set.")
+        return os.getenv(required_variables[0]), os.getenv(required_variables[1])
+    except ValueError as e:
+        print(e)
+
+
 if __name__ == "__main__":
     load_dotenv('.env')
-    username = os.getenv("INSTAGRAM_USERNAME")
-    password = os.getenv("INSTAGRAM_PASSWORD")
+    username, password = load_environment_variables()
 
     L = instaloader.Instaloader()
     L.login(username, password)
 
     profile = Profile.from_username(L.context, username)
 
-    data = {"date": date.today().isoformat(), "followers": []}
+    data: Dict = {"date": date.today().isoformat(), "followers": []}
 
-    old_followers = {} if is_file_empty(PREVIOUS_FOLLOWERS_FILE_PATH) else read_json_file(PREVIOUS_FOLLOWERS_FILE_PATH)
+    old_followers = read_json_file(PREVIOUS_FOLLOWERS_FILE_PATH) if file_exists(PREVIOUS_FOLLOWERS_FILE_PATH) else {}
 
     for follower in profile.get_followers():
         data["followers"].append(str(follower.username))
@@ -47,7 +59,7 @@ if __name__ == "__main__":
         outfile.write(followers_json_object)
 
     if bool(old_followers):
-        unfollows = [] if is_file_empty(UNFOLLOWED_FILE_PATH) else read_json_file(UNFOLLOWED_FILE_PATH)
+        unfollows = read_json_file(UNFOLLOWED_FILE_PATH) if file_exists(UNFOLLOWED_FILE_PATH) else []
         differences = list(set(data['followers']) - set(old_followers["followers"]))
         unfollowed = list(set(differences) - set(old_followers["followers"]))
 

@@ -24,12 +24,12 @@ StoppedFollowing is a Python app designed to help you identify individuals who h
 
 4. Run the project in your console:
     ```bash
-    python app.py
+    poetry run python app.py
     ```
 
 ## How the App Works
 
-The first time you run the app, it populates `previous_time_followers.json` with your current followers. Subsequent runs compare your current followers with the saved data, updating `unfollowed_you.json` with unfollower information in descending order by date.
+The first time you run the app, it creates and populates `previous_time_followers.json` with your current followers. Subsequent runs compare your current followers with the saved data, creating and then updating `unfollowed_you.json` with unfollower information in descending order by date.
 
 ## License
 

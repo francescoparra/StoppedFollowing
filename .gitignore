@@ -1,2 +1,4 @@
 .env
 .venv
+previous_time_followers.json
+unfollowed_you.json
