@@ -11,6 +11,9 @@ python = "^3.11"
 instaloader = "^4.10.3"
 python-dotenv = "^1.0.0"
 
+[tool.poetry.group.test.dependencies]
+flake8 = "^7.0.0"
+mypy = "^1.7"
 
 [build-system]
 requires = ["poetry-core"]
