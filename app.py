@@ -8,6 +8,7 @@ from typing import Dict
 
 UNFOLLOWED_FILE_PATH = "unfollowed_you.json"
 PREVIOUS_FOLLOWERS_FILE_PATH = "previous_time_followers.json"
+NOT_FOLLOWING_FILE_PATH = "not_following_you.json"
 
 
 def file_exists(file_path):
@@ -60,8 +61,10 @@ if __name__ == "__main__":
 
     if bool(old_followers):
         unfollows = read_json_file(UNFOLLOWED_FILE_PATH) if file_exists(UNFOLLOWED_FILE_PATH) else []
-        differences = list(set(data['followers']) - set(old_followers["followers"]))
-        unfollowed = list(set(differences) - set(old_followers["followers"]))
+        unfollowed = []
+        for old_fw in old_followers["followers"]:
+            if old_fw not in data["followers"]:
+                unfollowed.append(old_fw)
 
         for ufw in unfollowed:
             unfollows.append({"date": date.today().isoformat(), "username": ufw})
@@ -71,3 +74,14 @@ if __name__ == "__main__":
 
         with open(UNFOLLOWED_FILE_PATH, "w") as outfile:
             outfile.write(unfollowed_json_object)
+
+    # follows_not_following = []
+    # for follow in profile.get_followees():
+    #     if follow.followers < 5000:
+    #         if str(follow.username) not in data['followers']:
+    #             follows_not_following.append(str(follow.username))
+    #
+    # not_following_json_object = json.dumps(follows_not_following, indent=2)
+    #
+    # with open(NOT_FOLLOWING_FILE_PATH, "w") as outfile:
+    #     outfile.write(not_following_json_object)
