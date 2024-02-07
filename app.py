@@ -72,14 +72,3 @@ if __name__ == "__main__":
 
             with open(UNFOLLOWED_FILE_PATH, "w") as outfile:
                 outfile.write(unfollowed_json_object)
-
-    # follows_not_following = []
-    # for follow in profile.get_followees():
-    #     if follow.followers < 5000:
-    #         if str(follow.username) not in data['followers']:
-    #             follows_not_following.append(str(follow.username))
-    #
-    # not_following_json_object = json.dumps(follows_not_following, indent=2)
-    #
-    # with open(NOT_FOLLOWING_FILE_PATH, "w") as outfile:
-    #     outfile.write(not_following_json_object)
