@@ -47,8 +47,7 @@ if __name__ == "__main__":
     L.login(username, password)
 
     profile = Profile.from_username(L.context, username)
-
-    data: Dict = {"date": date.today().isoformat(), "followers": []}
+    data: Dict = {"date": date.today().isoformat(), "number": profile.followers, "followers": []}
 
     old_followers = read_json_file(PREVIOUS_FOLLOWERS_FILE_PATH) if file_exists(PREVIOUS_FOLLOWERS_FILE_PATH) else {}
 
